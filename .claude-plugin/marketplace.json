@@ -1,0 +1,15 @@
+{
+    "name": "apex-neptune-claude-plugin-repo",
+    "owner": {
+	"name": "Don Schwarz",
+	"email": "don.schwarz@gmail.com"
+    },
+    "plugins": [
+	{
+	    "name": "apex-neptune-claude-plugin",
+	    "description": "Download and analyze data from Apex Neptune aquarium controller. Use when user wants to check tank parameters, download sensor data, or analyze historical aquarium trends.",
+	    "source": "./",
+	    "strict": false
+	}
+    ]
+}

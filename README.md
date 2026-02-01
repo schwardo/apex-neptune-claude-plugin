@@ -20,22 +20,16 @@ A Claude Code plugin for monitoring and analyzing data from your Apex Neptune aq
 
 ### Install the Plugin
 
-Clone this repository and install it as a Claude Code plugin:
+Install the Claude marketplace via Github:
 
-```bash
-# Clone the repository
-git clone https://github.com/schwardo/apex-neptune-claude-plugin.git
-cd apex-neptune-claude-plugin
-
-# Install as a plugin (symlink to Claude Code plugins directory)
-mkdir -p ~/.claude/plugins
-ln -s "$(pwd)" ~/.claude/plugins/apex-neptune
+```claude
+/plugin marketplace add schwardo/apex-neptune-claude-plugin
 ```
 
-Alternatively, if you prefer to copy instead of symlink:
+Install the `apex-neptune-claude-plugin` plugin from the marketplace:
 
-```bash
-cp -r apex-neptune-claude-plugin ~/.claude/plugins/apex-neptune
+```claude
+/plugin install apex-neptune-claude-plugin@apex-neptune-claude-plugin-repo
 ```
 
 ### Verify Installation
