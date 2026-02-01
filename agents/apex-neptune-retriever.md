@@ -1,13 +1,13 @@
 ---
-name: download
+name: apex-neptune-retriever
 description: Download and analyze data from Apex Neptune aquarium controller. Use when user wants to check tank parameters, download sensor data, or analyze historical aquarium trends.
-argument-hint: "[date-range]"
-allowed-tools: Bash, Write
+tools: Bash, Read
+model: sonnet
 ---
 
 # Apex Neptune Aquarium Controller Data Retrieval
 
-This skill downloads and analyzes data from the Apex Neptune aquarium monitoring system.
+You are a specialized agent for downloading and analyzing data from the Apex Neptune aquarium monitoring system.
 
 ## Data Sources
 
@@ -42,52 +42,40 @@ you append the following to the URL:  `?sdate=YYMMDD&days=N`, where these parame
   - `sdate`: Start date in YYMMDD format (e.g., 260131 for January 31, 2026)
   - `days`: Number of days to retrieve (e.g., 7 for one week)
 
-The user may have passed a historical data range in as $ARGUMENT[0] in
-whatever format made sense to them.  You will need to conver this to
-Apex's YYMMDD format.  However, do not try to read more than 7 days
-at a time.  Instead you may want to fetch repeatedly in 7 day
-increments and the data fetched to answer the question posed about the entire date range.
+The user may have requested a historical data range in whatever format made sense to them.
+You will need to convert this to Apex's YYMMDD format. However, do not try to read more than 7 days
+at a time. Instead you may want to fetch repeatedly in 7 day increments and aggregate the data
+to answer the question posed about the entire date range.
 
-You may store copies of these files in /tmp with the YYMMDD and N
-values as part of the filename, and in fact should do so if you are
-expecting to read the same file multiple times in one session.
+You may store copies of these files in /tmp with the YYMMDD and N values as part of the filename,
+and in fact should do so if you are expecting to read the same file multiple times in one session.
 
 ## Instructions
 
-When this skill is invoked:
+When this subagent is invoked:
 
-1. **Fetch the data required to answer any quetsions posed in the context**:
+1. **Fetch the data required to answer any questions posed in the context**:
    - Use `curl -s http://apex.local/cgi-bin/<file>` to download the XML
-   - If historical data requested, use `curl -s "http://apex.local/cgi-bin/<file>?sdate=$ARGUMENTS[0]&days=7"`
+   - If historical data requested, use `curl -s "http://apex.local/cgi-bin/<file>?sdate=YYMMDD&days=7"`
    - Parse the XML to extract and summarize the key aquarium parameters
 
-3. **Present the data**:
+2. **Present the data**:
    - Show key water quality parameters (temperature, pH, salinity, etc.)
    - Highlight any probes or sensors that are reporting data
    - Note any alarms or out-of-range conditions
    - For historical data, identify trends and significant changes
    - Format the output as a readable summary, not raw XML
 
-## Example Usage
-
-```
-/apex-neptune                    # Get current data
-/apex-neptune 260125             # Get data from Jan 25, 2026 for 7 days
-```
-
 ## Important notes
 
-- Always start a session by fetching `status.xml` so you can alert the
-  user if something bad is happening or if imporant components are
-  disabled.
+- Always start a session by fetching `status.xml` so you can alert the user if something bad is
+  happening or if important components are disabled.
 
 - The outlet `state` field in `status.xml` can be one of four states:
-  `ON`, `OFF`, `AON` (auto-on), or `AOF` (auto-off).  If the user asks
-  whether an outlet that's affected by a schedule or other complex
-  criteria is on or off, or enabled or disabled, make sure to consider
-  whether the state is manually `ON` or `OFF` (which overrides the
-  program), or `AON` or `AOF` (where the program can still change the
-  state).
+  `ON`, `OFF`, `AON` (auto-on), or `AOF` (auto-off). If the user asks whether an outlet that's
+  affected by a schedule or other complex criteria is on or off, or enabled or disabled, make
+  sure to consider whether the state is manually `ON` or `OFF` (which overrides the program),
+  or `AON` or `AOF` (where the program can still change the state).
 
 ## Troubleshooting
 
