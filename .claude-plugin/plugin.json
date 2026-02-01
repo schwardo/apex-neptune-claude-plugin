@@ -1,0 +1,13 @@
+{
+    "name": "apex-neptune",
+    "version": "1.0.0",
+    "description": "Download and analyze data from Apex Neptune aquarium controller. Use when user wants to check tank parameters, download sensor data, or analyze historical aquarium trends.",
+    "author": {
+	"name": "Don Schwarz",
+	"email": "don.schwarz@gmail.com",
+	"url": "https://github.com/schwardo"
+    },
+    "repository": "https://github.com/schwardo/apex-neptune-claude-plugin",
+    "license": "Apache-2.0",
+    "keywords": ["apex-neptune", "reef", "fishtank"]
+}

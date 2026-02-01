@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+  outlog.xml - Outlet State Change Log
+
+  This file records every time the Apex changes the state of an outlet.
+  Each record shows when an outlet changed state and what the new state is.
+
+  A new log is started daily at midnight.
+
+  State values:
+  - ON: Outlet turned on
+  - OFF: Outlet turned off
+
+  Historical data retrieval:
+  - Supports date range queries: ?sdate=YYMMDD&days=N
+  - Example: ?sdate=260125&days=7 (Jan 25, 2026 for 7 days)
+
+  Use cases:
+  - Track equipment runtime
+  - Identify frequent cycling (may indicate problem)
+  - Correlate equipment changes with parameter changes
+  - Monitor feeding cycles
+  - Verify program execution
+-->
+<outlog>
+  <hostname>apex</hostname>
+  <software>5.04_7A18</software>
+  <hardware>1.0</hardware>
+
+  <record>
+    <date>01/31/2026 00:15:23</date>
+    <name>Heater</name>
+    <state>ON</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 00:42:15</date>
+    <name>Heater</name>
+    <state>OFF</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 02:30:45</date>
+    <name>ATOPump</name>
+    <state>ON</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 02:31:22</date>
+    <name>ATOPump</name>
+    <state>OFF</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 03:18:30</date>
+    <name>Heater</name>
+    <state>ON</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 03:45:12</date>
+    <name>Heater</name>
+    <state>OFF</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 09:00:00</date>
+    <name>ReefLED</name>
+    <state>ON</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 12:00:00</date>
+    <name>Feeder</name>
+    <state>ON</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 12:00:03</date>
+    <name>ReturnPmp</name>
+    <state>OFF</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 12:00:03</date>
+    <name>Skimmer</name>
+    <state>OFF</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 12:10:00</date>
+    <name>Feeder</name>
+    <state>OFF</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 12:10:00</date>
+    <name>ReturnPmp</name>
+    <state>ON</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 12:10:00</date>
+    <name>Skimmer</name>
+    <state>ON</state>
+  </record>
+
+  <record>
+    <date>01/31/2026 21:00:00</date>
+    <name>ReefLED</name>
+    <state>OFF</state>
+  </record>
+</outlog>

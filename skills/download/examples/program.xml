@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!--
+  program.xml - Current Program Statements
+
+  This file contains the programming logic for each outlet, written in the
+  Apex-specific control language. The program controls when outlets turn on/off
+  based on probe readings, time schedules, and other conditions.
+
+  Common programming constructs:
+  - Fallback OFF/ON: Default state if no other conditions are met
+  - If [probe] < [value] Then ON: Turn on if probe reading is below value
+  - If [probe] > [value] Then OFF: Turn off if probe reading is above value
+  - If Time [start] to [end] Then ON: Turn on during time range
+  - If FeedA 000 Then OFF: Turn off during feeding cycle A for 0 minutes
+  - OSC [on]:[off]/[period] Then ON: Oscillate with on/off times over period
+  - Defer [time]: Wait before acting on condition changes
+  - When ON > [time] Then OFF: Turn off after being on for duration
+  - Min Time [time]: Minimum time between state changes
+-->
+<program>
+  <hostname>apex</hostname>
+  <software>5.04_7A18</software>
+  <hardware>1.0</hardware>
+
+  <outlet>
+    <name>ReturnPmp</name>
+    <prog>
+      <![CDATA[
+Fallback ON
+If FeedA 000 Then OFF
+If FeedB 000 Then OFF
+      ]]>
+    </prog>
+  </outlet>
+
+  <outlet>
+    <name>Heater</name>
+    <prog>
+      <![CDATA[
+Fallback OFF
+If Temp < 77.5 Then ON
+If Temp > 78.5 Then OFF
+Min Time 005:00 Then OFF
+      ]]>
+    </prog>
+  </outlet>
+
+  <outlet>
+    <name>Skimmer</name>
+    <prog>
+      <![CDATA[
+Fallback ON
+If FeedA 000 Then OFF
+If FeedB 000 Then OFF
+      ]]>
+    </prog>
+  </outlet>
+
+  <outlet>
+    <name>ReefLED</name>
+    <prog>
+      <![CDATA[
+Fallback OFF
+If Time 09:00 to 21:00 Then ON
+      ]]>
+    </prog>
+  </outlet>
+
+  <outlet>
+    <name>Feeder</name>
+    <prog>
+      <![CDATA[
+Fallback OFF
+Set OFF
+      ]]>
+    </prog>
+  </outlet>
+
+  <outlet>
+    <name>ATOPump</name>
+    <prog>
+      <![CDATA[
+Fallback OFF
+If Switch1 OPEN Then ON
+Defer 000:10 Then ON
+When ON > 002:00 Then OFF
+Min Time 060:00 Then OFF
+      ]]>
+    </prog>
+  </outlet>
+
+  <outlet>
+    <name>WavePump</name>
+    <prog>
+      <![CDATA[
+Fallback OFF
+OSC 000:10/001:00/000:30 Then ON
+If FeedA 000 Then OFF
+      ]]>
+    </prog>
+  </outlet>
+</program>

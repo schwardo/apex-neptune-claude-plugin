@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!--
+  datalog.xml - Probe Value Snapshots
+
+  This file records probe readings at regular intervals based on the logging
+  interval configured in the Apex (default: 20 minutes).
+
+  A new log is started daily at midnight.
+
+  Historical data retrieval:
+  - Supports date range queries: ?sdate=YYMMDD&days=N
+  - Example: ?sdate=260125&days=7 (Jan 25, 2026 for 7 days)
+  - Limit requests to 7 days at a time; fetch multiple times for longer periods
+
+  Probe types and typical values:
+  - Temp: Temperature in °F (typical reef: 77-79°F) or °C (25-26°C)
+  - pH: pH level (typical reef: 7.8-8.4)
+  - Cond: Conductivity/Salinity in ppt (typical saltwater: 35 ppt)
+  - ORP: Oxidation-Reduction Potential in mV (typical reef: 300-450 mV)
+  - DO: Dissolved Oxygen in mg/L (typical: 6-8 mg/L)
+
+  Use cases:
+  - Track parameter stability over time
+  - Identify trends (temperature drift, pH decline)
+  - Correlate with equipment changes or maintenance
+  - Generate graphs and reports
+  - Detect gradual equipment failures
+-->
+<datalog>
+  <hostname>apex</hostname>
+  <software>5.04_7A18</software>
+  <hardware>1.0</hardware>
+  <timezone>-5.00</timezone>
+
+  <!-- Each record represents a snapshot at a specific time -->
+  <record>
+    <date>01/31/2026 00:00:00</date>
+    <probe>
+      <name>Temp</name>
+      <value>78.1</value>
+    </probe>
+    <probe>
+      <name>pH</name>
+      <value>8.12</value>
+    </probe>
+    <probe>
+      <name>Salt</name>
+      <value>35.0</value>
+    </probe>
+    <probe>
+      <name>ORP</name>
+      <value>362</value>
+    </probe>
+  </record>
+
+  <record>
+    <date>01/31/2026 00:20:00</date>
+    <probe>
+      <name>Temp</name>
+      <value>78.0</value>
+    </probe>
+    <probe>
+      <name>pH</name>
+      <value>8.13</value>
+    </probe>
+    <probe>
+      <name>Salt</name>
+      <value>35.1</value>
+    </probe>
+    <probe>
+      <name>ORP</name>
+      <value>365</value>
+    </probe>
+  </record>
+
+  <record>
+    <date>01/31/2026 00:40:00</date>
+    <probe>
+      <name>Temp</name>
+      <value>78.2</value>
+    </probe>
+    <probe>
+      <name>pH</name>
+      <value>8.14</value>
+    </probe>
+    <probe>
+      <name>Salt</name>
+      <value>35.0</value>
+    </probe>
+    <probe>
+      <name>ORP</name>
+      <value>368</value>
+    </probe>
+  </record>
+
+  <record>
+    <date>01/31/2026 01:00:00</date>
+    <probe>
+      <name>Temp</name>
+      <value>78.3</value>
+    </probe>
+    <probe>
+      <name>pH</name>
+      <value>8.15</value>
+    </probe>
+    <probe>
+      <name>Salt</name>
+      <value>35.1</value>
+    </probe>
+    <probe>
+      <name>ORP</name>
+      <value>370</value>
+    </probe>
+  </record>
+
+  <record>
+    <date>01/31/2026 01:20:00</date>
+    <probe>
+      <name>Temp</name>
+      <value>78.2</value>
+    </probe>
+    <probe>
+      <name>pH</name>
+      <value>8.14</value>
+    </probe>
+    <probe>
+      <name>Salt</name>
+      <value>35.0</value>
+    </probe>
+    <probe>
+      <name>ORP</name>
+      <value>367</value>
+    </probe>
+  </record>
+
+  <record>
+    <date>01/31/2026 01:40:00</date>
+    <probe>
+      <name>Temp</name>
+      <value>78.1</value>
+    </probe>
+    <probe>
+      <name>pH</name>
+      <value>8.13</value>
+    </probe>
+    <probe>
+      <name>Salt</name>
+      <value>35.1</value>
+    </probe>
+    <probe>
+      <name>ORP</name>
+      <value>365</value>
+    </probe>
+  </record>
+
+  <record>
+    <date>01/31/2026 02:00:00</date>
+    <probe>
+      <name>Temp</name>
+      <value>78.0</value>
+    </probe>
+    <probe>
+      <name>pH</name>
+      <value>8.12</value>
+    </probe>
+    <probe>
+      <name>Salt</name>
+      <value>35.0</value>
+    </probe>
+    <probe>
+      <name>ORP</name>
+      <value>363</value>
+    </probe>
+  </record>
+</datalog>

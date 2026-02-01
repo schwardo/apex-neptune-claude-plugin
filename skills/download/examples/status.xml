@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!--
+  status.xml - Real-time Status Report
+
+  This file contains two main sections:
+  1. Power failure information (most recent power fail event)
+  2. Current outlet states and probe values
+
+  Probe types:
+  - Temp: Temperature sensor (value in °F or °C)
+  - pH: pH level sensor (typical reef range: 7.8-8.4)
+  - Cond: Conductivity/Salinity sensor (typical saltwater: 35 ppt)
+  - ORP: Oxidation-Reduction Potential (mV)
+  - DO: Dissolved Oxygen
+
+  Outlet states:
+  - ON: Manually turned on (overrides program)
+  - OFF: Manually turned off (overrides program)
+  - AON: Auto-on (controlled by program, currently on)
+  - AOF: Auto-off (controlled by program, currently off)
+
+  xstatus values:
+  - OK: Normal operation
+  - ALARM: Triggered alarm condition
+-->
+<status>
+  <hostname>apex</hostname>
+  <software>5.04_7A18</software>
+  <hardware>1.0</hardware>
+  <serial>AC5:12345</serial>
+  <timezone>-5.00</timezone>
+  <date>01/31/2026 14:30:15</date>
+
+  <!-- Power failure information -->
+  <power>
+    <failed>01/28/2026 03:15:22</failed>
+    <restored>01/28/2026 03:18:45</restored>
+  </power>
+
+  <!-- Current probe readings -->
+  <probes>
+    <probe>
+      <name>Temp</name>
+      <value>78.2</value>
+      <type>Temp</type>
+    </probe>
+
+    <probe>
+      <name>pH</name>
+      <value>8.15</value>
+      <type>pH</type>
+    </probe>
+
+    <probe>
+      <name>Salt</name>
+      <value>35.1</value>
+      <type>Cond</type>
+    </probe>
+
+    <probe>
+      <name>ORP</name>
+      <value>365</value>
+      <type>ORP</type>
+    </probe>
+  </probes>
+
+  <!-- Current outlet states -->
+  <outlets>
+    <outlet>
+      <name>ReturnPmp</name>
+      <outputID>0</outputID>
+      <state>AON</state>
+      <deviceID>base_Var1</deviceID>
+      <xstatus>OK</xstatus>
+    </outlet>
+
+    <outlet>
+      <name>Heater</name>
+      <outputID>1</outputID>
+      <state>AOF</state>
+      <deviceID>base_Var2</deviceID>
+      <xstatus>OK</xstatus>
+    </outlet>
+
+    <outlet>
+      <name>Skimmer</name>
+      <outputID>2</outputID>
+      <state>AON</state>
+      <deviceID>base_Var3</deviceID>
+      <xstatus>OK</xstatus>
+    </outlet>
+
+    <outlet>
+      <name>ReefLED</name>
+      <outputID>3</outputID>
+      <state>AON</state>
+      <deviceID>base_Var4</deviceID>
+      <xstatus>OK</xstatus>
+    </outlet>
+
+    <outlet>
+      <name>Feeder</name>
+      <outputID>4</outputID>
+      <state>OFF</state>
+      <deviceID>base_Var5</deviceID>
+      <xstatus>OK</xstatus>
+    </outlet>
+
+    <outlet>
+      <name>ATOPump</name>
+      <outputID>5</outputID>
+      <state>AOF</state>
+      <deviceID>base_Var6</deviceID>
+      <xstatus>OK</xstatus>
+    </outlet>
+  </outlets>
+</status>
