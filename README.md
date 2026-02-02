@@ -142,6 +142,113 @@ Show me the programming logic for my heater
 
 Claude will fetch `program.xml` and explain the control logic in plain English.
 
+#### Analyze your water changes
+
+```
+> when was my last water change?
+
+I'll check your Apex Neptune aquarium controller data to find
+information about your last water change.
+
+Your last water change was yesterday, January 31, 2026, done manually
+between approximately 4:58 PM and 5:30 PM.
+
+The Apex Neptune logs show the sequence:
+- Return pump and doser were turned off
+- Tank was filled with new saltwater (about 13 minutes total)
+- Return pump and doser were turned back on
+
+Also, I noticed your Automatic Water Change (AWC) system is currently
+set to OFF and hasn't run in at least the past 8 weeks. If you want to
+use the automatic system, you'll need to turn the AWC outlet back on.
+
+> and before that?
+
+Before that, you had 6 other manual water changes over the past ~2.5 months:
+
+1. January 11, 2026 - 20 days before (your longest interval)
+2. December 31, 2025 - 10 days before that
+3. December 12, 2025 - 18 days before that
+4. November 29, 2025 - 13 days before that
+5. November 22, 2025 - 6 days before that (shortest interval)
+6. November 15, 2025 - 7 days before that (earliest in the logs)
+
+Your water change pattern:
+- Average interval: 12.3 days
+- Shortest: 6 days
+- Longest: 20 days (the gap before your most recent change)
+
+All water changes follow the same manual procedure: stir saltwater,
+turn off return pump/skimmer/doser, fill tank, restart
+equipment. Takes about 10-27 minutes total.
+```
+
+This was all extracted directly from historical Apex Neptune logs with no additional context.  The response from the `apex-neptune-retriever` subagent was a much more detailed report which inferred the purpose of each outlet from the name and timing correlations.  Here's an exerpt:
+
+```
+===============================================================================
+                           STATISTICS SUMMARY
+===============================================================================
+
+Total tracking period:         78 days (Nov 15, 2025 - Jan 31, 2026)
+Average interval:              12.3 days between water changes
+Minimum interval:              6 days (Nov 22 → Nov 29)
+Maximum interval:              20 days (Jan 11 → Jan 31)
+Typical change duration:       10-27 minutes
+
+Time since last water change:  1 day / 26.5 hours (as of Feb 1, 2026 7:30pm)
+
+===============================================================================
+                      WATER CHANGE PROCEDURE PATTERN
+===============================================================================
+
+The manual water change procedure follows this consistent pattern:
+
+1. PREPARATION PHASE:
+   - SWSTIR (saltwater stirring pump) activated to mix new saltwater
+   - Runs for 10-30 minutes before water change begins
+
+2. DRAIN PHASE:
+   - RetPump (return pump) turns OFF
+   - Skimmer turns OFF  
+   - Doser turns OFF
+   - Water is presumably siphoned/drained manually (not tracked by Apex)
+
+3. FILL PHASE:
+   - TANKFILL outlet activates
+   - XFERPUMP (transfer pump) turns ON
+   - New saltwater pumped into display tank
+   - Multiple fill cycles sometimes used (2-5 minutes each)
+
+4. RESTART PHASE:
+   - RetPump turns back ON
+   - Doser turns back ON
+   - TANKFILL turns OFF
+   - Skimmer restarts (5-minute defer period)
+
+5. CLEANUP:
+   - Additional XFERPUMP cycles may run
+   - System returns to normal operation
+
+===============================================================================
+                          EQUIPMENT NOTES
+===============================================================================
+
+AWC (Automatic Water Change) Outlet Status:
+- Currently: OFF (manually disabled)
+- Program: Set ON, auto-shutoff after 90 hours runtime
+- Has NOT been active in the past 8+ weeks
+- All water changes are being performed MANUALLY
+
+Key Outlets Used During Water Changes:
+- RetPump: Main circulation pump (turned off during change)
+- Doser: Dosing pump (turned off during change)
+- TANKFILL: Fills display tank with new saltwater
+- XFERPUMP: Transfer pump (moves water between containers)
+- SWSTIR: Stirs/mixes saltwater in preparation container
+- Skimmer: Protein skimmer (turned off during change)
+```
+
 ## Data Sources
 
 The plugin accesses four XML data sources from your Apex Neptune:
